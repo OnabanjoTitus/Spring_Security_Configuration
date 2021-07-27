@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/security")
 public class SecurityController {
-    @GetMapping("/")
+    @GetMapping("")
     public String itWorks(){
         return "It works";
     }
