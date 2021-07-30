@@ -1,4 +1,4 @@
-//package com.security.security_configurations.security;
+//package com.security.security_configurations.secured.security;
 //
 //import org.springframework.context.annotation.Bean;
 //import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
