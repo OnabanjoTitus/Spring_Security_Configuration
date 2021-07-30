@@ -1,13 +1,12 @@
 package com.security.security_configurations.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/security")
 public class SecurityController {
-    @GetMapping("")
+//    @GetMapping("")
+    @RequestMapping(value = "", method = { RequestMethod.POST,  RequestMethod.GET })
     public String itWorks(){
         return "It works";
     }
@@ -15,6 +14,7 @@ public class SecurityController {
     public String itWorksAdmin(){
         return "It works admin";
     }
+
     @GetMapping("/user")
     public String itWorksUser(){
         return "It works users";
