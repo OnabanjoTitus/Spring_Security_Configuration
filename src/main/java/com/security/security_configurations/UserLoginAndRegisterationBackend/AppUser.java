@@ -1,5 +1,6 @@
 package com.security.security_configurations.UserLoginAndRegisterationBackend;
 
+import com.security.security_configurations.UserLoginAndRegisterationBackend.ConfirmationToken.ConfirmationToken;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
+
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -28,6 +31,8 @@ public class AppUser implements UserDetails {
     private AppUserRole appUserRole;
     private Boolean locked=false;
     private Boolean enabled=false;
+    @OneToMany
+    private List<ConfirmationToken> confirmationTokenList;
 
     public AppUser(String firstName,
                    String lastName,
