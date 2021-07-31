@@ -54,4 +54,8 @@ public class RegistrationService {
         return "confirmed";
     }
 
+    public String regenerateToken(String email) {
+        log.info("Request hit here Registration service-->{}",email);
+        return appUserService.signUpUser(email);
+    }
 }

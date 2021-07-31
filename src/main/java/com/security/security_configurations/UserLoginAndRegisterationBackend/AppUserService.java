@@ -3,6 +3,7 @@ package com.security.security_configurations.UserLoginAndRegisterationBackend;
 import com.security.security_configurations.UserLoginAndRegisterationBackend.ConfirmationToken.ConfirmationToken;
 import com.security.security_configurations.UserLoginAndRegisterationBackend.ConfirmationToken.ConfirmationTokenService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
-
+@Slf4j
 @Service
 @AllArgsConstructor
 public class AppUserService implements UserDetailsService {
@@ -43,11 +44,30 @@ public class AppUserService implements UserDetailsService {
         ConfirmationToken confirmationToken= new ConfirmationToken(
                 token,
                 LocalDateTime.now(),
-                LocalDateTime.now().plusMinutes(15),appUser
+                LocalDateTime.now().plusMinutes(5),appUser
         );
         confirmationTokenService.saveConfirmationToken(confirmationToken);
-
         return token;
+    }
+    public String signUpUser(String email){
+        AppUser userExists=userRepository.findAppUserByEmail(email);
+        log.info("Request hit here app user found  service and we returned the token-->{}",userExists.getEmail());
+        if(userExists.getEmail()!=null){
+            String token=UUID.randomUUID().toString();
+            ConfirmationToken confirmationToken= new ConfirmationToken(
+                    token,
+                    LocalDateTime.now(),
+                    LocalDateTime.now().plusMinutes(15),
+                    userExists
+            );
+            confirmationTokenService.saveConfirmationToken(confirmationToken);
+            log.info("Request hit here app user service and we returned the token-->{}",token);
+            return token;
+        }else{
+            throw new IllegalStateException("user with this email does not exists");
+        }
+
+
     }
     public void enableAppUser(String email) {
          AppUser appUser=userRepository.findAppUserByEmail(email);
