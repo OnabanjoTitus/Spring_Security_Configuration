@@ -23,4 +23,5 @@ public class RegisterController {
        return registrationService.regenerateToken(email);
     }
 
+
 }

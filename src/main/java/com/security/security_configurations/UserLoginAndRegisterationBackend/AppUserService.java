@@ -49,6 +49,7 @@ public class AppUserService implements UserDetailsService {
         confirmationTokenService.saveConfirmationToken(confirmationToken);
         return token;
     }
+
     public String signUpUser(String email){
         AppUser userExists=userRepository.findAppUserByEmail(email);
         log.info("Request hit here app user found  service and we returned the token-->{}",userExists.getEmail());
@@ -69,6 +70,7 @@ public class AppUserService implements UserDetailsService {
 
 
     }
+
     public void enableAppUser(String email) {
          AppUser appUser=userRepository.findAppUserByEmail(email);
          appUser.setEnabled(true);
