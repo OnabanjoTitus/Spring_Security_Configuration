@@ -17,10 +17,10 @@ public class RegisterController {
     public String confirm(@PathVariable("id") String token) {
         return registrationService.confirmToken(token);
     }
-    @PostMapping("/regenerate/{email}")
-    public String regenerate(@PathVariable("email") String email){
-        log.info("Request hit here controller-->{}",email);
-       return registrationService.regenerateToken(email);
+    @PostMapping("/regenerate")
+    public String regenerate(@RequestBody RegistrationRequest request){
+        log.info("Request hit here controller-->{}",request);
+       return registrationService.regenerateToken(request.getEmail());
     }
 
 

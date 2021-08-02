@@ -16,8 +16,8 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 @Configuration
 @AllArgsConstructor
 @EnableWebSecurity
-@EnableOAuth2Sso
-@EnableOAuth2Client
+//@EnableOAuth2Sso
+//@EnableOAuth2Client
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final AppUserService appUserService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -31,7 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .anyRequest()
                 .authenticated().and()
-                .formLogin().and().oauth2Login().permitAll();
+                .formLogin();
     }
 
     @Override
